@@ -6,4 +6,37 @@
 
     </div>
 
+   <ng-container >
+    <table class="table table-bordered table-striped mt-3" *ngIf="categories && categories.length > 0">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let category of categories">
+                <td>{{ category.id }}</td>
+                <td>{{ category.name }}</td>
+                <td>{{ category.urlHandel }}</td>
+                <td>
+                    <a [routerLink]="['/admin/categories/edit', category.id]" class="btn btn-sm btn-warning me-2">Edit</a>
+                    <button class="btn btn-sm btn-danger">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div *ngIf="categories && categories.length === 0" class="alert alert-info mt-3">
+        No categories available.
+    </div>
+
+    <div *ngIf="!categories" class="text-center mt-3">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>  
+   </ng-container>
 </div>

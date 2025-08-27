@@ -13,10 +13,10 @@ export class CategoryService {
   constructor(private http:HttpClient) { }
 
   addCategory(model:AddCategoryRequest): Observable<void> {
-    return this.http.post<void>('${environment.apiUrl}/categories',model);
+    return this.http.post<void>(`${environment.apiUrl}/categories`,model);
   }
 
   getAllCategories():Observable<Category[]>{
-    return this.http.get<Category[]>('${environment.apiUrl}/categories');
+    return this.http.get<Category[]>(`${environment.apiUrl}/categories`);
   }
 }
