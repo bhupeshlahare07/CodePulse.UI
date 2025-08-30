@@ -7,7 +7,7 @@
     </div>
 
    <ng-container >
-    <table class="table table-bordered table-striped mt-3" *ngIf="categories && categories.length > 0">
+    <table class="table table-bordered table-striped mt-3" *ngIf="categories$ | async as categories">
         <thead>
             <tr>
                 <th>ID</th>
@@ -29,11 +29,13 @@
         </tbody>
     </table>
 
-    <div *ngIf="categories && categories.length === 0" class="alert alert-info mt-3">
-        No categories available.
+    <div *ngIf="categories$ | async as categories;" >
+        <div *ngIf="categories.length === 0" class="alert alert-info mt-3 text-center">
+            No categories available.
+        </div>
     </div>
 
-    <div *ngIf="!categories" class="text-center mt-3">
+    <div *ngIf="!categories$" class="text-center mt-3">
         <div class="spinner-border text-primary" role="status">
             <span class="visually-hidden">Loading...</span>
         </div>
