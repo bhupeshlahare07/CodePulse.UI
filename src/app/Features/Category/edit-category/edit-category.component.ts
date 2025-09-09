@@ -1,22 +1,53 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { CategoryService } from '../Services/category.service';
+import { Category } from '../models/category.model';
 
 @Component({
   selector: 'app-edit-category',
   templateUrl: './edit-category.component.html',
   styleUrl: './edit-category.component.css'
 })
-export class EditCategoryComponent implements OnInit {
+export class EditCategoryComponent implements OnInit, OnDestroy {
 
   id: string | null = null;
-  
-  constructor(private route:ActivatedRoute){
+  paramSubscription?: Subscription;
+  category?: Category;
+
+  constructor(private route: ActivatedRoute, private categoryService: CategoryService) {
 
   }
+
+  // ngOnInit(): void {
+  //   this.paramSubscription = this.route.params.subscribe(params=>{
+  //     this.id = params['id'];
+  //   })
+  // }
+
   ngOnInit(): void {
-    this.route.params.subscribe(params=>{
-      this.id = 'id';
+    this.paramSubscription = this.route.paramMap.subscribe({
+      next: (params) => {
+        this.id = params.get('id');
+
+        if (this.id) {
+          // Fetch the category details using the id
+          this.categoryService.getCategoryById(this.id)
+            .subscribe({
+              next: (response) => {
+                this.category = response;
+              }
+            })
+        }
+        error: (err: any) => {
+          console.error('Error fetching route parameters', err);
+        }
+      }
     })
+  }
+
+  ngOnDestroy(): void {
+    this.paramSubscription?.unsubscribe();
   }
 
 }

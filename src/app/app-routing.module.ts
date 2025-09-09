@@ -14,7 +14,7 @@ const routes: Routes = [
     component:AddCategoryComponent
   },
   {
-    path:'admin/categories/edit/:id',
+    path:'admin/categories/:id',
     component:EditCategoryComponent
   }
 ];
