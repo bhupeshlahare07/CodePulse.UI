@@ -23,7 +23,7 @@
                 <td>{{ category.urlHandel }}</td>
                 <td>
                     <a [routerLink]="['/admin/categories/', category.id]" class="btn btn-sm btn-warning me-2">Edit</a>
-                    <button class="btn btn-sm btn-danger">Delete</button>
+                    <button class="btn btn-sm btn-danger"(click)="onDelete(category.id)">Delete</button>
                 </td>
             </tr>
         </tbody>
