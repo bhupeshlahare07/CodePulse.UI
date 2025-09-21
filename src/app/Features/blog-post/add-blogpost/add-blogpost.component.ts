@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { AddBlogpost } from '../models/add-blogpost.model';
+import { BlogPostService } from '../services/blog-post.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-blogpost',
@@ -9,20 +11,25 @@ import { AddBlogpost } from '../models/add-blogpost.model';
 export class AddBlogpostComponent {
   model:AddBlogpost;
 
-  constructor(){
+  constructor(private blogpostservise:BlogPostService, private router:Router){
     this.model = {
       title: '',
       shortDescription: '',
       content: '',
       featuredImageUrl: '',
       urlHandle: '',
+      author: '',
       publishedDate: new Date(),
-      isvisible: false
+      isvisible: true
     };
   }
   onSubmit(): void {
-    console.log('Form submitted:', this.model);
-    // Here you can add logic to send the form data to your backend service
+    this.blogpostservise.createBlogPost(this.model)
+    .subscribe({
+      next:(response)=>{
+      this.router.navigateByUrl('/admin/blogposts');
+      }
+    });
   }
 
 }
