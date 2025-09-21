@@ -5,3 +5,26 @@
     <a [routerLink]="['/admin/blogposts/add']" class="btn btn-primary mb-3">Add Blog Post</a>
   </div>
 </div>
+
+<ng-container>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Title</th>
+         <th>Short Description</th>
+      <th>Is Visible</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let blogPost of blogPosts$ | async">
+      <td>{{ blogPost.title }}</td>
+      <td>{{ blogPost.shortDescription }}</td>
+      <td>{{ blogPost.isvisible }}</td>
+      <td>
+        <a [routerLink]="['/admin/blogposts/edit', blogPost.id]" class="btn btn-sm btn-primary me-2">Edit</a>
+        <!-- <button (click)="onDelete(blogPost.id)" class="btn btn-sm btn-danger">Delete</button> -->
+      </td>
+    </tr>
+  </tbody>
+  </table>
+</ng-container>
