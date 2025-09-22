@@ -19,7 +19,14 @@
 
             <div class="mb-3">
                <label for="content" class="form-label">Content</label>
-               <textarea class="form-control" id="content" name="content" rows="5" placeholder="Enter blog post content" [(ngModel)]="model.content"></textarea>
+               <div class="d-flex flex-lg-row">
+                <div class="col-6 p-2">
+                    <textarea class="form-control" id="content" name="content" rows="5" placeholder="Enter blog post content" [(ngModel)]="model.content"></textarea>
+                </div>
+                <div class="col-6 p-2" style="max-height: 400px; overflow-y: scroll;">
+                    <markdown [data]="model.content"></markdown>
+                </div>
+               </div>               
             </div>
 
             <div class="mb-3">
