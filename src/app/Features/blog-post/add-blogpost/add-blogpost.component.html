@@ -24,6 +24,12 @@
 
             <div class="mb-3">
                 <label for="featuredImageUrl" class="form-label">Featured Image Url</label>
+                <ng-container *ngIf="model.featuredImageUrl !==''">
+                    <div class="mb-3">
+                        <img [src]="model.featuredImageUrl" alt="Featured Image" class="img-thumbnail" style="max-height: 200px;">
+                    </div>
+
+                </ng-container>
                 <input type="text" class="form-control" id="featuredImageUrl" name="featuredImageUrl" placeholder="Enter blog post featured image url" [(ngModel)]="model.featuredImageUrl">
             </div>
 
