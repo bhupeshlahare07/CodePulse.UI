@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>Blog Posts</h1>
+  <h1>Edit Blog Posts</h1>
   <ng-container *ngIf="model">
     <form #form="ngForm" (ngSubmit)="onSubmit()">
       <div class="mt-2 mb-5">
@@ -125,22 +125,33 @@
         </div>
 
         <!-- <div class="mt-3">
-          <label for="categories" class="form-label">Categories</label>
+          <label for="categories" class="form-label">categories</label>
           <select
             multiple
             class="form-select"
             id="categories"
             name="categories"
-            [(ngModel)]="model.categories"
+            [(ngModel)]="selectedCategories"
           >
             <option
-              *ngFor="let category of categorys$ | async"
+              *ngfor="let category of categorys$ | async"
               [value]="category.id"
             >
               {{ category.name }}
             </option>
           </select>
         </div> -->
+
+        <div class="mt-3">
+          <label for="categories" class="form-label">Categories</label>
+
+          <ng-container *ngIf="categories$ | async as categories">
+            <select class="form-control" [(ngModel)]="selectedCategories" name="categories" id="categories" multiple>
+              <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+            </select>
+          </ng-container>
+
+        </div>
 
         <div class="mt-3">
           <button type="submit" class="btn btn-primary me-2">Save</button>
