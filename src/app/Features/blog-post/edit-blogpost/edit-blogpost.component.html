@@ -67,6 +67,7 @@
           <label for="featuredImageUrl" class="form-label"
             >Featured Image Url</label
           >
+          <button type="button" class="btn btn-light" (click)="openImageSelector()">Select Image</button>
           <ng-container *ngIf="model.featuredImageUrl !== ''">
             <div class="mb-3">
               <img
@@ -160,4 +161,9 @@
       </div>
     </form>
   </ng-container>
+</div>
+
+<div class="images-container-modal" [ngClass]="{'d-block':isImageSelectorVisible, 'd-none': !isImageSelectorVisible}">
+   <button class="btn-close" (click)="hideImageSelector()" aria-label="Close"></button>
+  <app-image-selector></app-image-selector>
 </div>
