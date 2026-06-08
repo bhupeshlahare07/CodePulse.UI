@@ -4,7 +4,17 @@
     </div>
     <div class="card-body">
         <div class="d-flex flex-md-row flex-sm-column flex-wrap">
-            <div class="col-8">
+            <div class="col-8" style="max-height: 400px; overflow-y: auto;">
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    <div class="col" *ngFor="let image of images$ | async">
+                        <div class="card h-100">
+                            <img [src]="image.url" class="card-img-top" alt="{{image.title}}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{image.title}}</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
             <div class="col-4 bg-light p-3">
